@@ -1,0 +1,72 @@
+{% extends 'TGNAdminAreaBundle::layout-base.html.twig' %}
+
+{% block sub_meta_title 'Citizens'|trans({},'meta') %}
+
+{% block content %}
+
+<h2>{{ 'Citizens'|trans }}</h2>
+
+{{ tgn.all_flashes() }}
+
+<div class="table-filters">
+        <fieldset class="data-tables-filters" data-table="citizens-grid"> 
+
+            {# filter by name #}
+            <div class="field-box">
+                <label>{{ 'First name'|trans({}, 'label') }} {{ 'Last name'|trans({}, 'label') }}</label>
+                <input type="text" class="span3 ftext" data-colindx="1">
+            </div>
+
+            {# filter by email #}
+            <div class="field-box">
+                <label>{{ 'Email'|trans({}, 'label') }}</label>
+                <input type="text" class="span3 ftext" data-colindx="2">
+            </div>
+            
+            {# filter by status #}
+            <div class="field-box select-span3">
+                <label>{{ 'Status'|trans({}, 'label') }}</label>
+                <select data-colindx="6">
+                    <option></option>
+                    {% for status in statuses %}<option value="{{ status }}">{{ status }}</option>{% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-blue">{{ 'button-filter'|trans }}</button>
+
+        </fieldset>
+    </div>
+
+<table id="citizens-grid" class="admin-data-tables dom-sourced table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>{{ 'Registration Date'|trans }}</th>
+            <th>{{ 'Full Name'|trans }}</th>
+            <th>{{ 'Email'|trans }}</th>
+            <th>{{ 'Phone Number'|trans }}</th>
+            <th>{{ 'Status'|trans }}</th>
+            <th>{{ 'Actions'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+
+   {% for citizen in citizens %}
+        <tr>
+            <td>{{ citizen.createdAt|date("d.m.Y")}}</td>
+            <td>{{ citizen.lastName }} {{ citizen.firstName }}</td>
+            <td>{{ citizen.email }}</td>
+            <td>{{ citizen.phoneNumber }}</td>
+            <td>{{ coloured_status(citizen.status.slug, citizen.status.name) }}</td>
+            <td>
+                <span class="actions">
+                    <a href="{{ path('tgn_aa_citizen_change_status', {'id':citizen.id}) }} " class="change-status" title="{{ 'Change status'|trans }}"></a>
+                </span>
+            </td>
+        </tr>
+   {% endfor %}
+
+    </tbody>
+</table>
+
+
+{% endblock %}

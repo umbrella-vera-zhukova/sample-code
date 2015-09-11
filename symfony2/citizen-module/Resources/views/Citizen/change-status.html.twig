@@ -1,0 +1,19 @@
+{% extends 'TGNAdminAreaBundle::layout-base.html.twig' %}
+
+{% block sub_meta_title 'Citizens'|trans({},'meta') %}
+
+{% block content %}
+<div class="main-block">
+    <h2>{{ 'Change current status'|trans }}</h2>
+    
+    <p>{{citizen.fullName}}</p>
+
+    <form action="" method="post" {{ form_enctype(form) }} class="jClever" >
+
+	{{ form_widget(form) }}
+
+	{{ tgn.btn() }}
+    </form>
+</div>
+
+{% endblock %}

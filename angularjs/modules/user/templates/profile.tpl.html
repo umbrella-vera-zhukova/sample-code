@@ -1,0 +1,14 @@
+<ng-include src="'templates/navbar/profile.tpl.html'"
+            ng-controller="trdProfile.ctrlUserbar"></ng-include>
+
+<main class="content" role="main">
+    <div class="middle-container">
+        <ng-include src="'templates/sidebar/profile.tpl.html'"
+                    ng-controller="trdProfile.ctrlSidebar"></ng-include>
+
+        <div class="middle middle-has-left-side">
+            <ui-view>
+            </ui-view>
+        </div>
+    </div>
+</main>

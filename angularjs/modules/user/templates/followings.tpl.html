@@ -1,0 +1,16 @@
+<div id="followings" infinite-scroll="fnShowMore()">
+    <div class="middle-wrap">
+        <div class="middle-title">
+            <h2 class="pull-left">Users i follow</h2>
+        </div>
+        <div class="row-line" ng-repeat="user in users">
+            <ng-include src="'templates/partials/user-item.tpl.html'" />
+        </div>
+    </div>
+    <div ng-show="hasMore" class="load-more MT20" ng-class="{active: isLoading}">
+        <a class="btn btn-lg btn-blue" ng-click="fnShowMore()" href="">
+            <span class="icon trd-undo"></span>
+            {{ 'BTN.LOAD_MORE' | trans }}
+        </a>
+    </div>
+</div>

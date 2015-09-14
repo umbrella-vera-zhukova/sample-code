@@ -1,0 +1,32 @@
+<div id="items" class="items"> 
+    <div class="grid-container">
+        <div class="grid" infinite-scroll="fnShowMore()">
+            <div masonry item-selector=".js-masonry-item" load-images="false" class="js-masonry">
+                <div ng-repeat="item in items"
+                     masonry-brick class="item-col js-masonry-item"
+                     ng-switch on="itemType"
+                >
+                    <div ng-switch-when="web-video" ng-show="!item.isRemoved" ng-controller="trdTrend.ctrlWebVideoListItem"><ng-include src="'templates/item/list/web-video.tpl.html'" /></div>
+                    <div ng-switch-when="web-audio" ng-show="!item.isRemoved" ng-controller="trdTrend.ctrlWebAudioListItem"><ng-include src="'templates/item/list/web-audio.tpl.html'" /></div>
+                    <div ng-switch-when="trendii"  ng-show="!item.isRemoved" ng-switch on="item.type">
+                        <div ng-switch-when="video"><ng-include src="'templates/item/list/trendii-video.tpl.html'" /></div>
+                        <div ng-switch-when="audio"><ng-include src="'templates/item/list/trendii-audio.tpl.html'" /></div>
+                        <div ng-switch-when="picture"><ng-include src="'templates/item/list/trendii-image.tpl.html'" /></div>
+                        <div ng-switch-when="article"><ng-include src="'templates/item/list/trendii-article.tpl.html'" /></div>
+                        <div ng-switch-when="shopping"><ng-include src="'templates/item/list/trendii-product.tpl.html'" /></div>
+                    </div>
+
+                    <trd-tip name="item" ng-if="$index == 0"></trd-tip>
+                </div>
+            </div>
+            <!-- drag and drop clonned obj -->
+            <div ng-drag-clone=""></div>
+        </div>
+    </div>
+    <div ng-show="hasMore" class="load-more" ng-class="{active: isLoading}">
+        <a class="btn btn-lg btn-blue" ng-click="fnShowMore()" href="">
+            <span class="icon trd-undo"></span>
+            {{ 'BTN.LOAD_MORE' | trans }}
+        </a>
+    </div>
+</div>
